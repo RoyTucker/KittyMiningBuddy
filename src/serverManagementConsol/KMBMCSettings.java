@@ -62,7 +62,7 @@ public class KMBMCSettings {
         this.ConnStatus = ConnStatus;
         propertyChangeSupport.firePropertyChange(PROP_CONNSTATUS, oldConnStatus, ConnStatus);
     }
-    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+    private transient PropertyChangeSupport propertyChangeSupport;
 
     /**
      * Add PropertyChangeListener.
@@ -70,6 +70,9 @@ public class KMBMCSettings {
      * @param listener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
+        if(null == propertyChangeSupport){
+            propertyChangeSupport = new PropertyChangeSupport(this);
+        }
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
